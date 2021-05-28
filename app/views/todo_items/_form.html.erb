@@ -1,4 +1,5 @@
 <%= form_for([@todo_list, @todo_list.todo_items.build]) do |f| %>
     <%= f.text_field :content, placeholder:"new todo"%>
+    <%= f.datetime_local_field :duedate, :placeholder => '2021-12-31 11:59:59 PM' %>
     <%= f.submit%>
 <% end %>

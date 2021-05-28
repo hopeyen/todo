@@ -17,8 +17,14 @@ def destroy
 end 
 
 def complete
-    @todo_item.update_attribute(:completed_at, Time.now)
-    redirect_to @todo_list, notice: "Todo item completed"
+    if !@todo_item.completed?
+        @todo_item.update_attribute(:completed_at, Time.now)
+        redirect_to @todo_list, notice: "Todo item completed"
+    else
+        @todo_item.update_attribute(:completed_at, nil)
+        redirect_to @todo_list, notice: "Todo item uncompleted"
+    end
+    
 end 
 
 private
@@ -31,7 +37,7 @@ def set_todo_item
 end
 
 def todo_item_params
-    params[:todo_item].permit(:content)
+    params[:todo_item].permit(:content, :duedate)
 end
 
 end
